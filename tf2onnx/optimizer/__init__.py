@@ -17,10 +17,12 @@ from .loop_optimizer import LoopOptimizer
 from .back_to_back_optimizer import BackToBackOptimizer
 from .upsample_optimizer import UpsampleOptimizer
 from .const_dequantize_optimizer import ConstDequantizeOptimizer
+from .reshape_optimizer import ReshapeOptimizer
 from .. import logging
 
 # optimizer sequence need to be considered carefully
 _optimizers = OrderedDict([
+    ("reshape_optimizer", ReshapeOptimizer),
     ("optimize_transpose", TransposeOptimizer),
     ("remove_redundant_upsample", UpsampleOptimizer),
     ("fold_constants", ConstFoldOptimizer),
