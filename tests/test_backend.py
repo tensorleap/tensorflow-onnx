@@ -3733,6 +3733,19 @@ class BackendTests(Tf2OnnxBackendTestBase):
         self._run_test_case(func, [_OUTPUT], {_INPUT: x_val1, _INPUT1: x_val2, _INPUT2: x_val3},
                             graph_validator=graph_validator)
 
+    def test_tensor_dot(self):
+        # a_val = np.arange(2 * 3 * 4 * 5).reshape((2, 3, 4, 5)).astype(np.float32)
+        # b_val = np.arange(2 * 3 * 4 * 5).reshape((2, 3, 4, 5)).astype(np.float32)
+        shape_1 = np.array([5, 2, 3], dtype=np.int64)
+        shape_2 = np.array([2, 3, 4], dtype=np.int64)
+
+        def func(a, b):
+            a = tf.zeros(a)
+            b = tf.zeros(b)
+            c = tf.tensordot(a, b, [[1, 2], [0, 1]])
+            return tf.identity(c, name=_TFOUTPUT)
+        self._run_test_case(func, [_OUTPUT], {_INPUT: shape_1, _INPUT1: shape_2})
+
     def test_graph_matcher(self):
         shape = [2, 6]
         x_val = np.random.random(shape).astype(np.float32)
