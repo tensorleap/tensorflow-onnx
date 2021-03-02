@@ -22,8 +22,8 @@ from .. import logging
 
 # optimizer sequence need to be considered carefully
 _optimizers = OrderedDict([
-    ("reshape_optimizer", ReshapeOptimizer),
     ("optimize_transpose", TransposeOptimizer),
+    ("reshape_optimizer", ReshapeOptimizer),
     ("remove_redundant_upsample", UpsampleOptimizer),
     ("fold_constants", ConstFoldOptimizer),
     ("const_dequantize_optimizer", ConstDequantizeOptimizer),

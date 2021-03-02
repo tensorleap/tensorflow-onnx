@@ -391,7 +391,7 @@ class LoopRewriterBase(object):
             is_ta = True
 
             ta_write_node = self.g.get_node_by_output(last_iteration_output_id)
-            utils.make_sure(is_tf_tensor_array_write_op(ta_write_node), "ta nextiteration is not following ta write op")
+            utils.make_sure(is_tf_tensor_array_write_op(ta_write_node), "ta nextiteration is not following ta write op %s", ta_write_node.name)
             last_iteration_output_id = ta_write_node.input[2]
             ta_index_id = ta_write_node.input[1]
 

@@ -109,15 +109,16 @@ class ReshapeOptimizer(GraphOptimizerBase):
     def _optimize_reshape(self, node, graph):
         if node.inputs[1].is_const():
             return False
-        inp_shape = graph.get_shape(node.input[0])
-        if inp_shape is None:
-            return False
         nodes_to_compute_shape = self._trace_reshape_to_tensor(graph, node.inputs[1], node.input[0])
         if nodes_to_compute_shape is None:
             return False
+        inp_shape = graph.get_shape(node.input[0])
+        if inp_shape is None:
+            inp_shape = [-1] * 3
+            #return False
         symbolic_shape = self._symbolic_compute_shape(graph, nodes_to_compute_shape)
-        utils.make_sure(len(symbolic_shape.shape) == 1, "Shape must have rank 1")
-        symbolic_shape = symbolic_shape.tolist()
+        # utils.make_sure(len(symbolic_shape.shape) == 1, "Shape must have rank 1")
+        # symbolic_shape = symbolic_shape.tolist()
         product_cnt = len([val for val in symbolic_shape if val.is_product()])
         idx_cnt = len([val for val in symbolic_shape if val.is_idx()])
         if product_cnt > 1:
@@ -156,6 +157,8 @@ class ReshapeOptimizer(GraphOptimizerBase):
                 results[node.output[0]] = node.get_tensor_value(as_list=False)
             if node.type == "Shape":
                 shape = graph.get_shape(node.input[0])
+                if shape is None:
+                    shape = [-1] * 3
                 if -1 in shape:
                     results[node.output[0]] = SymbolicShapeTensorValue.np_array_for_shape(shape)
                 else:
@@ -185,7 +188,17 @@ class ReshapeOptimizer(GraphOptimizerBase):
                 keepdims = node.get_attr_value("keepdims", 1)
                 results[node.output[0]] = np.prod(inp, axis=tuple(axes), keepdims=keepdims)
             if node.type == "Slice":
-                pass
+                inps = [results[inp] for inp in node.input]
+                rank = len(inps[0].shape)
+                if len(inps) == 3:
+                    inps.append(list(range(rank)))
+                if len(inps) == 4:
+                    inps.append([1] * rank)
+                slices = [slice(None, None, None) for _ in range(rank)]
+                data, starts, ends, axes, steps = inps
+                for axis, start, end, step in zip(axes, starts, ends, steps):
+                    slices[axis] = slice(start, end, step)
+                results[node.output[0]] = data[tuple(slices)]
             if node.type == "Concat":
                 axis = node.get_attr_value("axis")
                 inps = [results[inp] for inp in node.input]
@@ -200,7 +213,8 @@ class ReshapeOptimizer(GraphOptimizerBase):
                 axis = node.get_attr_value("axis", 0)
                 results[node.output[0]] = np.take(data, indices, axis=axis)
             results[node.output[0]] = np.array(results[node.output[0]])
-        return results[node.output[0]]
+        res = results[node.output[0]].tolist()
+        return [SymbolicShapeTensorValue([], v) if not isinstance(v, SymbolicShapeTensorValue) else v for v in res]
 
 
     def compute_unsqueeze(self, shape_in, axes):
