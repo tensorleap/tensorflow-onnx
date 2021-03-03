@@ -17,7 +17,7 @@ os.environ["TF_CPP_MIN_LOG_LEVEL"] = "3"
 import numpy as np
 import onnxruntime as rt
 import tensorflow as tf
-import tf2onnx
+import tf2onnxnightly
 
 compare_perf = False
 
@@ -96,8 +96,8 @@ class TestTransformers(unittest.TestCase):
         if not large:
             model_path = model_path + ".onnx"
         print("= convert")
-        _, _ = tf2onnx.convert.from_keras(model, input_signature=input_signature,
-                                          opset=13, large_model=large, output_path=model_path)
+        _, _ = tf2onnxnightly.convert.from_keras(model, input_signature=input_signature,
+                                                 opset=13, large_model=large, output_path=model_path)
 
         if large:
             # need to unpack the zip for run_onnxruntime()

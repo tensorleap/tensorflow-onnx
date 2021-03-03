@@ -11,14 +11,14 @@ import flatbuffers
 from common import *  # pylint: disable=wildcard-import,unused-wildcard-import
 from backend_test_base import Tf2OnnxBackendTestBase
 
-from tf2onnx import utils
-from tf2onnx.tfonnx import process_tf_graph
-from tf2onnx import optimizer
+from tf2onnxnightly import utils
+from tf2onnxnightly.tfonnx import process_tf_graph
+from tf2onnxnightly import optimizer
 
-from tf2onnx.tflite import Model, OperatorCode, SubGraph, Operator, Tensor, Buffer
-from tf2onnx.tflite.BuiltinOperator import BuiltinOperator
-from tf2onnx.tflite.TensorType import TensorType
-from tf2onnx.tflite.CustomOptionsFormat import CustomOptionsFormat
+from tf2onnxnightly.tflite import Model, OperatorCode, SubGraph, Operator, Tensor, Buffer
+from tf2onnxnightly.tflite.BuiltinOperator import BuiltinOperator
+from tf2onnxnightly.tflite.TensorType import TensorType
+from tf2onnxnightly.tflite.CustomOptionsFormat import CustomOptionsFormat
 
 # pylint: disable=missing-docstring
 

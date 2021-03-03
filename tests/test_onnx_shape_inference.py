@@ -12,8 +12,8 @@ import numpy as np
 from onnx import TensorProto
 from backend_test_base import Tf2OnnxBackendTestBase
 from common import *  # pylint: disable=wildcard-import,unused-wildcard-import
-from tf2onnx import utils
-from tf2onnx.graph import Graph
+from tf2onnxnightly import utils
+from tf2onnxnightly.graph import Graph
 
 # pylint: disable=missing-docstring
 

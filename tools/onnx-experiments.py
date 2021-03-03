@@ -20,8 +20,8 @@ import traceback
 import numpy as np
 import onnx
 
-import tf2onnx.utils
-from tf2onnx.graph import GraphUtil
+import tf2onnxnightly.utils
+from tf2onnxnightly.graph import GraphUtil
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger("onnx-experiments")
@@ -81,7 +81,7 @@ def rewrite_constant_fold(g, ops):
                     logger.info("folding node type=%s, name=%s", op.type, op.name)
                     if op.type == "Cast":
                         dst = op.get_attr_int("to")
-                        np_type = tf2onnx.utils.map_onnx_to_numpy_type(dst)
+                        np_type = tf2onnxnightly.utils.map_onnx_to_numpy_type(dst)
                         val = np.cast[np_type](*inputs)
                     elif op.type == "Transpose":
                         perm = op.get_attr("perm").ints
@@ -103,7 +103,7 @@ def rewrite_constant_fold(g, ops):
                     else:
                         val = func(*inputs)
 
-                    new_node_name = tf2onnx.utils.make_name(op.name)
+                    new_node_name = tf2onnxnightly.utils.make_name(op.name)
                     new_output_name = new_node_name
                     old_output_name = op.output[0]
                     old_node_name = op.name

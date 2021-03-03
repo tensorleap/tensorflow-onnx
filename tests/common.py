@@ -14,7 +14,7 @@ from parameterized import parameterized
 import numpy as np
 import tensorflow as tf
 
-from tf2onnx import constants, logging, utils, tf_utils, tf_loader
+from tf2onnxnightly import constants, logging, utils, tf_utils, tf_loader
 
 # pylint: disable=import-outside-toplevel
 __all__ = [

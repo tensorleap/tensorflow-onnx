@@ -16,10 +16,10 @@ from tensorflow.python.ops import init_ops
 
 from backend_test_base import Tf2OnnxBackendTestBase
 from common import *  # pylint: disable=wildcard-import, unused-wildcard-import
-from tf2onnx import utils
-from tf2onnx.tf_utils import get_tf_tensor_shape
-from tf2onnx.shape_inference import infer_shape_for_graph
-from tf2onnx.tf_loader import tf_reset_default_graph, tf_session, tf_placeholder, tf_optimize
+from tf2onnxnightly import utils
+from tf2onnxnightly.tf_utils import get_tf_tensor_shape
+from tf2onnxnightly.shape_inference import infer_shape_for_graph
+from tf2onnxnightly.tf_loader import tf_reset_default_graph, tf_session, tf_placeholder, tf_optimize
 
 # pylint: disable=missing-docstring
 

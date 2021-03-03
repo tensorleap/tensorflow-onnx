@@ -10,7 +10,7 @@ import re
 
 from collections import OrderedDict
 
-from tf2onnx.handler import tf_op
+from tf2onnxnightly.handler import tf_op
 
 parser = argparse.ArgumentParser()
 parser.add_argument('filename',

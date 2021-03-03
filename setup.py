@@ -13,7 +13,7 @@ import setuptools.command.install
 from setuptools import setup, find_packages, Command
 
 TOP_DIR = os.path.realpath(os.path.dirname(__file__))
-SRC_DIR = os.path.join(TOP_DIR, 'tf2onnx')
+SRC_DIR = os.path.join(TOP_DIR, 'tf2onnxnightly')
 
 try:
     git_version = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=TOP_DIR).decode('ascii').strip()
@@ -70,7 +70,7 @@ cmdclass = {
 }
 
 setup(
-    name="tf2onnx",
+    name="tf2onnxnightly",
     version=VersionInfo.version,
     description='Tensorflow to ONNX converter',
     setup_requires=['pytest-runner'],

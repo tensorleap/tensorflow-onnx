@@ -13,8 +13,8 @@ import tensorflow as tf
 
 from backend_test_base import Tf2OnnxBackendTestBase
 from common import requires_custom_ops
-from tf2onnx import utils
-from tf2onnx import constants
+from tf2onnxnightly import utils
+from tf2onnxnightly import constants
 
 # pylint: disable=missing-docstring,invalid-name,unused-argument,using-constant-test,import-outside-toplevel
 # pylint: disable=wrong-import-position

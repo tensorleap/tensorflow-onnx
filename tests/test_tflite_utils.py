@@ -8,8 +8,8 @@ import tensorflow as tf
 
 from common import *  # pylint: disable=wildcard-import,unused-wildcard-import
 from backend_test_base import Tf2OnnxBackendTestBase
-from tf2onnx.tf_loader import from_function, tf_session
-from tf2onnx.tflite_utils import read_tflite_model, parse_tflite_graph
+from tf2onnxnightly.tf_loader import from_function, tf_session
+from tf2onnxnightly.tflite_utils import read_tflite_model, parse_tflite_graph
 
 # pylint: disable=missing-docstring
 

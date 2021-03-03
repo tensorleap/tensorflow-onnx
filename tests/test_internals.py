@@ -15,10 +15,10 @@ from onnx import TensorProto
 from onnx import helper, numpy_helper
 
 import tensorflow as tf
-from tf2onnx import utils, tf_utils
-from tf2onnx.graph_matcher import OpTypePattern, GraphMatcher
-from tf2onnx.graph import GraphUtil
-from tf2onnx.tf_loader import tf_reset_default_graph, tf_session
+from tf2onnxnightly import utils, tf_utils
+from tf2onnxnightly.graph_matcher import OpTypePattern, GraphMatcher
+from tf2onnxnightly.graph import GraphUtil
+from tf2onnxnightly.tf_loader import tf_reset_default_graph, tf_session
 
 from backend_test_base import Tf2OnnxBackendTestBase
 from common import unittest_main

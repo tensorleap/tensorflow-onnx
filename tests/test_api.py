@@ -17,7 +17,7 @@ import tensorflow as tf
 
 from common import check_tf_min_version, unittest_main
 from backend_test_base import Tf2OnnxBackendTestBase
-import tf2onnx
+import tf2onnxnightly
 
 
 class ApiTests(Tf2OnnxBackendTestBase):
@@ -54,7 +54,7 @@ class ApiTests(Tf2OnnxBackendTestBase):
         else:
             output_path = os.path.join(self.test_data_directory, "model.onnx")
 
-        model_proto, _ = tf2onnx.convert.from_keras(
+        model_proto, _ = tf2onnxnightly.convert.from_keras(
             model, input_signature=spec, opset=self.config.opset, large_model=large_model, output_path=output_path)
         # input_names = [n.name for n in model_proto.graph.input]
         output_names = [n.name for n in model_proto.graph.output]
@@ -94,8 +94,8 @@ class ApiTests(Tf2OnnxBackendTestBase):
 
         ky = func(x, y)
 
-        model_proto, _ = tf2onnx.convert.from_function(concrete_func, input_signature=spec,
-                                                       opset=self.config.opset, output_path=output_path)
+        model_proto, _ = tf2onnxnightly.convert.from_function(concrete_func, input_signature=spec,
+                                                              opset=self.config.opset, output_path=output_path)
         output_names = [n.name for n in model_proto.graph.output]
         oy = self.run_onnxruntime(output_path, {"x": x, "y": y}, output_names)
         self.assertAllClose(ky, oy[0], rtol=0.3, atol=0.1)
@@ -118,8 +118,8 @@ class ApiTests(Tf2OnnxBackendTestBase):
         concrete_func = function.get_concrete_function(*spec)
         graph_def = concrete_func.graph.as_graph_def(add_shapes=True)
 
-        model_proto, _ = tf2onnx.convert.from_graph(graph_def, input_names=["x:0", "y:0"], output_names=["Identity:0"],
-                                                    opset=self.config.opset, output_path=output_path)
+        model_proto, _ = tf2onnxnightly.convert.from_graph(graph_def, input_names=["x:0", "y:0"], output_names=["Identity:0"],
+                                                           opset=self.config.opset, output_path=output_path)
         output_names = [n.name for n in model_proto.graph.output]
         oy = self.run_onnxruntime(output_path, {"x:0": x, "y:0": y}, output_names)
         self.assertAllClose(ky, oy[0], rtol=0.3, atol=0.1)
@@ -128,14 +128,14 @@ class ApiTests(Tf2OnnxBackendTestBase):
     @check_tf_min_version("1.15")
     def test_graphdef(self):
         output_path = os.path.join(self.test_data_directory, "model.onnx")
-        graph_def, _, _ = tf2onnx.tf_loader.from_graphdef(
+        graph_def, _, _ = tf2onnxnightly.tf_loader.from_graphdef(
             "tests/models/regression/graphdef/frozen.pb", ["X:0"], ["pred:0"])
 
         x = np.array([5.], dtype=np.float32)
         tensors_to_rename = {"pred:0": "pred", "X:0": "X"}
-        model_proto, _ = tf2onnx.convert.from_graph_def(graph_def, input_names=["X:0"], output_names=["pred:0"],
-                                                        opset=self.config.opset, output_path=output_path,
-                                                        tensors_to_rename=tensors_to_rename)
+        model_proto, _ = tf2onnxnightly.convert.from_graph_def(graph_def, input_names=["X:0"], output_names=["pred:0"],
+                                                               opset=self.config.opset, output_path=output_path,
+                                                               tensors_to_rename=tensors_to_rename)
         output_names = [n.name for n in model_proto.graph.output]
         oy = self.run_onnxruntime(output_path, {"X": x}, output_names)
         self.assertTrue(output_names[0] == "pred")

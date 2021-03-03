@@ -15,7 +15,7 @@ from tensorflow.python.ops import init_ops
 from tensorflow.python.ops import variable_scope
 from backend_test_base import Tf2OnnxBackendTestBase
 from common import unittest_main, check_gru_count, check_tf_max_version, check_opset_after_tf_version
-from tf2onnx.tf_loader import is_tf2
+from tf2onnxnightly.tf_loader import is_tf2
 
 
 # pylint: disable=missing-docstring,invalid-name,unused-argument,using-constant-test,cell-var-from-loop

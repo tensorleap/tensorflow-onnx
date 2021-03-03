@@ -14,8 +14,8 @@ from parameterized import parameterized
 
 from backend_test_base import Tf2OnnxBackendTestBase
 from common import unittest_main, group_nodes_by_type, check_opset_min_version, check_opset_max_version, get_test_config
-from tf2onnx import utils, constants
-from tf2onnx.graph import GraphUtil
+from tf2onnxnightly import utils, constants
+from tf2onnxnightly.graph import GraphUtil
 
 
 # pylint: disable=missing-docstring,invalid-name,unused-argument,using-constant-test

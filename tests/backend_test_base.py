@@ -22,13 +22,13 @@ import tensorflow as tf
 from tensorflow.python.ops import variables as variables_lib
 from tensorflow.python.ops import lookup_ops
 from common import get_test_config
-from tf2onnx import utils
-from tf2onnx.tfonnx import process_tf_graph
-from tf2onnx import optimizer
-from tf2onnx.tf_loader import tf_reset_default_graph, tf_session, tf_placeholder, from_function, freeze_session
-from tf2onnx.tf_loader import tf_optimize, is_tf2, get_hash_table_info
-from tf2onnx.tf_utils import compress_graph_def
-from tf2onnx.graph import ExternalTensorStorage
+from tf2onnxnightly import utils
+from tf2onnxnightly.tfonnx import process_tf_graph
+from tf2onnxnightly import optimizer
+from tf2onnxnightly.tf_loader import tf_reset_default_graph, tf_session, tf_placeholder, from_function, freeze_session
+from tf2onnxnightly.tf_loader import tf_optimize, is_tf2, get_hash_table_info
+from tf2onnxnightly.tf_utils import compress_graph_def
+from tf2onnxnightly.graph import ExternalTensorStorage
 
 
 if is_tf2():

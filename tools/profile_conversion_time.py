@@ -11,7 +11,7 @@ import io
 import argparse
 import tensorflow as tf
 from tensorflow.keras.applications import MobileNet, EfficientNetB2
-from tf2onnx import tfonnx
+from tf2onnxnightly import tfonnx
 try:
     from pyinstrument import Profiler
 except ImportError:

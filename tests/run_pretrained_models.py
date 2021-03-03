@@ -45,10 +45,10 @@ try:
 except ModuleNotFoundError:
     pass
 
-from tf2onnx import tf_loader, logging, optimizer, utils, tf_utils, constants
-from tf2onnx.tfonnx import process_tf_graph
-from tf2onnx.tf_loader import tf_session, tf_reset_default_graph
-from tf2onnx.graph import ExternalTensorStorage
+from tf2onnxnightly import tf_loader, logging, optimizer, utils, tf_utils, constants
+from tf2onnxnightly.tfonnx import process_tf_graph
+from tf2onnxnightly.tf_loader import tf_session, tf_reset_default_graph
+from tf2onnxnightly.graph import ExternalTensorStorage
 
 logger = logging.getLogger("run_pretrained")
 
@@ -459,7 +459,7 @@ class Test(object):
             tf_reset_default_graph()
 
             with tf.Graph().as_default() as tf_graph:
-                from tf2onnx.tf_utils import compress_graph_def
+                from tf2onnxnightly.tf_utils import compress_graph_def
                 if self.large_model:
                     const_node_values = compress_graph_def(graph_def)
                 tf.import_graph_def(graph_def, name='')

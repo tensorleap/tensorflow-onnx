@@ -7,7 +7,7 @@ import os
 import sys
 import unittest
 
-from tf2onnx import convert
+from tf2onnxnightly import convert
 from common import check_tf_min_version
 
 def run_test_case(args, paths_to_check=None):

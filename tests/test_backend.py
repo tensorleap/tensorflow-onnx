@@ -20,10 +20,10 @@ from tensorflow.python.ops import lookup_ops
 from backend_test_base import Tf2OnnxBackendTestBase
 # pylint reports unused-wildcard-import which is false positive, __all__ is defined in common
 from common import *  # pylint: disable=wildcard-import,unused-wildcard-import
-from tf2onnx import constants, utils
-from tf2onnx.graph_matcher import OpTypePattern, GraphMatcher
-from tf2onnx.tf_loader import is_tf2, tf_placeholder_with_default, tf_placeholder
-from tf2onnx.onnx_opset.signal import make_dft_constant
+from tf2onnxnightly import constants, utils
+from tf2onnxnightly.graph_matcher import OpTypePattern, GraphMatcher
+from tf2onnxnightly.tf_loader import is_tf2, tf_placeholder_with_default, tf_placeholder
+from tf2onnxnightly.onnx_opset.signal import make_dft_constant
 
 # pylint: disable=missing-docstring,invalid-name,unused-argument,function-redefined,cell-var-from-loop
 
